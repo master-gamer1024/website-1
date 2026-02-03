@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>For my fav human 💗</title>
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -13,27 +15,25 @@
       font-family: 'Poppins', sans-serif;
     }
 
-    /* 🌸 BACKGROUND – deeper Valentine pink */
     body {
-      height: 100vh;
+      min-height: 100vh;
       background: linear-gradient(135deg, #ff7a8a, #ffb3c6);
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
-      color: #ffffff;
+      overflow-x: hidden;
       text-align: center;
     }
 
-    /* 💗 CARD – soft blush with contrast */
+    /* 💗 CARD */
     .container {
-      background: rgba(255, 240, 245, 0.85);
-      padding: 40px;
-      border-radius: 26px;
+      background: rgba(255, 240, 245, 0.9);
+      padding: 48px 44px;
+      border-radius: 28px;
       backdrop-filter: blur(14px);
       box-shadow: 0 25px 45px rgba(255, 90, 120, 0.45);
-      max-width: 420px;
-      width: 90%;
+      max-width: 440px;
+      width: 92%;
       position: relative;
       z-index: 2;
     }
@@ -41,50 +41,46 @@
     h1 {
       font-family: 'Pacifico', cursive;
       font-size: 2.4rem;
-      margin-bottom: 15px;
+      margin-bottom: 18px;
       color: #ff4d6d;
     }
 
     p {
       font-size: 1.1rem;
-      line-height: 1.6;
-      margin-bottom: 30px;
+      line-height: 1.7;
+      margin-bottom: 34px;
       color: #7a2c3f;
     }
 
-    /* 🌹 BUTTONS */
     button {
-      padding: 12px 28px;
+      padding: 16px 32px;
       border: none;
       border-radius: 30px;
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 600;
       cursor: pointer;
       background: #ffffff;
       color: #ff4d6d;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      white-space: nowrap;
       box-shadow: 0 8px 18px rgba(255, 77, 109, 0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     button:hover {
-      transform: scale(1.1);
+      transform: scale(1.08);
       box-shadow: 0 12px 25px rgba(255, 77, 109, 0.35);
     }
 
     .button-row {
       display: flex;
       justify-content: center;
-      align-items: center;
-      gap: 16px;
+      gap: 18px;
     }
 
     .no-placeholder {
-      width: 110px;
-      height: 44px;
+      width: 120px;
+      height: 48px;
     }
 
-    /* ❌ NOPE BUTTON */
     #nopeButton {
       position: fixed;
       background: #ff4d6d;
@@ -98,7 +94,7 @@
       display: none;
     }
 
-    /* 💕 FLOATING HEARTS */
+    /* 💕 HEARTS */
     .hearts span {
       position: absolute;
       bottom: -20px;
@@ -111,6 +107,45 @@
     @keyframes floatUp {
       0% { transform: translateY(0); opacity: 1; }
       100% { transform: translateY(-100vh); opacity: 0; }
+    }
+
+    /* 📱 MOBILE OPTIMIZATION */
+    @media (max-width: 480px) {
+      body {
+        align-items: flex-start;
+        padding: 24px 0;
+      }
+
+      .container {
+        width: 95%;
+        min-height: 70vh;          /* 🔑 makes card feel bigger */
+        padding: 44px 26px;
+        border-radius: 24px;
+      }
+
+      h1 {
+        font-size: 2.1rem;
+      }
+
+      p {
+        font-size: 1.05rem;
+        line-height: 1.75;
+      }
+
+      .button-row {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      button {
+        width: 100%;
+        padding: 18px;
+        font-size: 1.1rem;
+      }
+
+      .no-placeholder {
+        visibility: hidden; /* keep layout logic intact */
+      }
     }
   </style>
 </head>
@@ -153,14 +188,12 @@
       Yayyy!! 🎉  
       I’m lucky to have you in my life 🥰  
       <br><br>
-      Thanks for all the laughs and memories 😄
+      Thanks for all the laughs and memories 😄  
       I am really missing you a lot 😣
     </p>
   </div>
 
-  <!-- NOPE BUTTON -->
   <button id="nopeButton">Nope 😝</button>
-
   <div class="hearts" id="hearts"></div>
 
   <script>
@@ -182,25 +215,22 @@
     }
 
     function makeNopeRunAway() {
-      const width = nopeButton.offsetWidth || 110;
-      const height = nopeButton.offsetHeight || 44;
+      const w = nopeButton.offsetWidth || 120;
+      const h = nopeButton.offsetHeight || 48;
 
-      const x = Math.random() * (window.innerWidth - width);
-      const y = Math.random() * (window.innerHeight - height);
-
-      nopeButton.style.left = x + "px";
-      nopeButton.style.top = y + "px";
+      nopeButton.style.left = Math.random() * (window.innerWidth - w) + "px";
+      nopeButton.style.top = Math.random() * (window.innerHeight - h) + "px";
     }
 
     function acceptRose() {
-      document.getElementById("roseScreen").classList.add("hidden");
-      document.getElementById("friendshipQuestionScreen").classList.remove("hidden");
+      roseScreen.classList.add("hidden");
+      friendshipQuestionScreen.classList.remove("hidden");
       positionNopeBesideAffirmative();
     }
 
     function acceptBestFriendRequest() {
-      document.getElementById("friendshipQuestionScreen").classList.add("hidden");
-      document.getElementById("finalScreen").classList.remove("hidden");
+      friendshipQuestionScreen.classList.add("hidden");
+      finalScreen.classList.remove("hidden");
       nopeButton.style.display = "none";
     }
 
