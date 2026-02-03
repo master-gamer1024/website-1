@@ -2,127 +2,207 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Valentine’s Week 💖</title>
+  <title>Best Friend Week 💙</title>
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
   <style>
-    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
 
     body {
-      height:100vh;
-      background:linear-gradient(135deg,#ff758c,#ff7eb3);
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      overflow:hidden;
-      color:white;
-      text-align:center;
+      height: 100vh;
+      background: linear-gradient(135deg, #6a85ff, #9fb7ff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      color: white;
+      text-align: center;
     }
 
     .container {
-      background:rgba(255,255,255,0.15);
-      padding:40px;
-      border-radius:20px;
-      backdrop-filter:blur(10px);
-      box-shadow:0 10px 30px rgba(0,0,0,0.2);
-      max-width:420px;
-      width:90%;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 40px;
+      border-radius: 24px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      max-width: 420px;
+      width: 90%;
+      position: relative;
+      z-index: 2;
     }
 
-    h1 { font-family:'Pacifico',cursive; font-size:2.4rem; margin-bottom:15px; }
-    p { font-size:1.1rem; line-height:1.6; margin-bottom:25px; }
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.4rem;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
 
     button {
-      padding:12px 28px;
-      border:none;
-      border-radius:30px;
-      font-size:1rem;
-      font-weight:600;
-      cursor:pointer;
-      background:#fff;
-      color:#ff4d6d;
-      transition:0.3s;
+      padding: 12px 28px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: #fff;
+      color: #4d6dff;
+      transition: transform 0.2s ease;
+      white-space: nowrap;
     }
 
-    button:hover { transform:scale(1.1); }
+    button:hover {
+      transform: scale(1.1);
+    }
 
-    .buttons { display:flex; justify-content:center; gap:20px; position:relative; }
-    #no { background:#ff4d6d; color:white; position:absolute; }
+    .button-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+    }
 
-    .hidden { display:none; }
+    .no-placeholder {
+      width: 110px;
+      height: 44px;
+    }
+
+    #nopeButton {
+      position: fixed;
+      background: #4d6dff;
+      color: white;
+      z-index: 10;
+      display: none;
+    }
+
+    .hidden {
+      display: none;
+    }
 
     .hearts span {
-      position:absolute;
-      bottom:-20px;
-      font-size:20px;
-      animation:floatUp 8s linear infinite;
-      opacity:0.7;
+      position: absolute;
+      bottom: -20px;
+      font-size: 20px;
+      animation: floatUp 8s linear infinite;
+      opacity: 0.7;
+      z-index: 1;
     }
 
     @keyframes floatUp {
-      0% { transform:translateY(0); opacity:1; }
-      100% { transform:translateY(-100vh); opacity:0; }
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ROSE DAY -->
-  <div class="container" id="rose">
-    <h1>🌹 Rose Day</h1>
-    <p>A rose for you, because even flowers feel shy standing next to your smile 💕</p>
-    <button onclick="goToPropose()">Accept Rose 🌹</button>
-  </div>
-
-  <!-- PROPOSE DAY -->
-  <div class="container hidden" id="propose">
-    <h1>💍 Propose Day</h1>
+  <!-- ROSE SCREEN -->
+  <div class="container" id="roseScreen">
+    <h1>🌹 Hey Priyaaa!</h1>
     <p>
-      I’ve been meaning to ask you something...  
-      something my heart already knows 💖  
-      <br><br>
-      Will you be mine?
+      This rose is for my favorite human 🌹  
+      Thanks for always being there, no matter what 💙  
+      Despite the distance between us recently, you remain the most irreplaceable part of my world.
     </p>
-    <div class="buttons">
-      <button onclick="goToValentine()">Yes 💘</button>
-      <button id="no">No 🙈</button>
+
+    <div class="button-row">
+      <button onclick="acceptRose()">Accept Rose 😄</button>
+      <div class="no-placeholder"></div>
     </div>
   </div>
 
-  <!-- VALENTINE DAY -->
-  <div class="container hidden" id="valentine">
-    <h1>💖 Valentine’s Day</h1>
+  <!-- FRIENDSHIP QUESTION SCREEN -->
+  <div class="container hidden" id="friendshipQuestionScreen">
+    <h1>🤝 Quick question for you</h1>
     <p>
-      You said yes… and just like that, my favorite day got even better 🥰  
+      I just want to officially say something important 😌  
       <br><br>
-      Happy Valentine’s Day, my love 💕
+      Will you stay my best friend forever?
+    </p>
+
+    <div class="button-row">
+      <button onclick="acceptBestFriendRequest()">Yes, Bestie 💙</button>
+      <div class="no-placeholder"></div>
+    </div>
+  </div>
+
+  <!-- FINAL SCREEN -->
+  <div class="container hidden" id="finalScreen">
+    <h1>💙 My Favourite Homosapien ⭐️</h1>
+    <p>
+      Yayyy!! 🎉  
+      I’m lucky to have you in my life 🥰🌺 
+      <br><br>
+      Thanks for all the laughs and memories😄
+      I am really missing you a lot 😔
     </p>
   </div>
+
+  <!-- REAL NO BUTTON -->
+  <button id="nopeButton">Nope 😝</button>
 
   <div class="hearts" id="hearts"></div>
 
   <script>
-    const noBtn = document.getElementById("no");
+    const nopeButton = document.getElementById("nopeButton");
 
-    function goToPropose() {
-      document.getElementById("rose").classList.add("hidden");
-      document.getElementById("propose").classList.remove("hidden");
+    function getVisibleNopePlaceholder() {
+      const visibleContainer = document.querySelector(".container:not(.hidden)");
+      return visibleContainer.querySelector(".no-placeholder");
     }
 
-    function goToValentine() {
-      document.getElementById("propose").classList.add("hidden");
-      document.getElementById("valentine").classList.remove("hidden");
+    function positionNopeBesideAffirmative() {
+      const placeholder = getVisibleNopePlaceholder();
+      if (!placeholder) return;
+
+      const rect = placeholder.getBoundingClientRect();
+      nopeButton.style.left = rect.left + "px";
+      nopeButton.style.top = rect.top + "px";
+      nopeButton.style.display = "block";
     }
 
-    noBtn.addEventListener("mouseover", () => {
-      const x = Math.random() * 200 - 100;
-      const y = Math.random() * 120 - 60;
-      noBtn.style.transform = `translate(${x}px, ${y}px)`;
-    });
+    function makeNopeRunAway() {
+      const width = nopeButton.offsetWidth || 110;
+      const height = nopeButton.offsetHeight || 44;
 
+      const x = Math.random() * (window.innerWidth - width);
+      const y = Math.random() * (window.innerHeight - height);
+
+      nopeButton.style.left = x + "px";
+      nopeButton.style.top = y + "px";
+    }
+
+    function acceptRose() {
+      document.getElementById("roseScreen").classList.add("hidden");
+      document.getElementById("friendshipQuestionScreen").classList.remove("hidden");
+      positionNopeBesideAffirmative();
+    }
+
+    function acceptBestFriendRequest() {
+      document.getElementById("friendshipQuestionScreen").classList.add("hidden");
+      document.getElementById("finalScreen").classList.remove("hidden");
+      nopeButton.style.display = "none";
+    }
+
+    window.addEventListener("load", positionNopeBesideAffirmative);
+    nopeButton.addEventListener("mouseenter", makeNopeRunAway);
+    nopeButton.addEventListener("click", makeNopeRunAway);
+
+    // Floating hearts
     const heartsContainer = document.getElementById("hearts");
     setInterval(() => {
       const heart = document.createElement("span");
-      heart.innerHTML = "💖";
+      heart.innerHTML = "💙";
       heart.style.left = Math.random() * 100 + "vw";
       heart.style.animationDuration = (Math.random() * 3 + 5) + "s";
       heartsContainer.appendChild(heart);
