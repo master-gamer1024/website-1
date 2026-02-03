@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Best Friend Week 💙</title>
+  <title>Best Friend Week 💗</title>
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
@@ -13,23 +13,25 @@
       font-family: 'Poppins', sans-serif;
     }
 
+    /* 🌸 BACKGROUND – deeper Valentine pink */
     body {
       height: 100vh;
-      background: linear-gradient(135deg, #6a85ff, #9fb7ff);
+      background: linear-gradient(135deg, #ff7a8a, #ffb3c6);
       display: flex;
       justify-content: center;
       align-items: center;
       overflow: hidden;
-      color: white;
+      color: #ffffff;
       text-align: center;
     }
 
+    /* 💗 CARD – soft blush with contrast */
     .container {
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 240, 245, 0.85);
       padding: 40px;
-      border-radius: 24px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      border-radius: 26px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 25px 45px rgba(255, 90, 120, 0.45);
       max-width: 420px;
       width: 90%;
       position: relative;
@@ -40,14 +42,17 @@
       font-family: 'Pacifico', cursive;
       font-size: 2.4rem;
       margin-bottom: 15px;
+      color: #ff4d6d;
     }
 
     p {
       font-size: 1.1rem;
       line-height: 1.6;
       margin-bottom: 30px;
+      color: #7a2c3f;
     }
 
+    /* 🌹 BUTTONS */
     button {
       padding: 12px 28px;
       border: none;
@@ -55,14 +60,16 @@
       font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
-      background: #fff;
-      color: #4d6dff;
-      transition: transform 0.2s ease;
+      background: #ffffff;
+      color: #ff4d6d;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
       white-space: nowrap;
+      box-shadow: 0 8px 18px rgba(255, 77, 109, 0.25);
     }
 
     button:hover {
       transform: scale(1.1);
+      box-shadow: 0 12px 25px rgba(255, 77, 109, 0.35);
     }
 
     .button-row {
@@ -77,24 +84,27 @@
       height: 44px;
     }
 
+    /* ❌ NOPE BUTTON */
     #nopeButton {
       position: fixed;
-      background: #4d6dff;
+      background: #ff4d6d;
       color: white;
       z-index: 10;
       display: none;
+      box-shadow: 0 10px 25px rgba(255, 77, 109, 0.45);
     }
 
     .hidden {
       display: none;
     }
 
+    /* 💕 FLOATING HEARTS */
     .hearts span {
       position: absolute;
       bottom: -20px;
       font-size: 20px;
       animation: floatUp 8s linear infinite;
-      opacity: 0.7;
+      opacity: 0.8;
       z-index: 1;
     }
 
@@ -108,10 +118,10 @@
 
   <!-- ROSE SCREEN -->
   <div class="container" id="roseScreen">
-    <h1>🌹 Hey Priyaaa!</h1>
+    <h1>🌹 Hey Priyaaaa!</h1>
     <p>
       This rose is for my favorite human 🌹  
-      Thanks for always being there, no matter what 💙  
+      Thanks for always being there, no matter what 💗  
       Despite the distance between us recently, you remain the most irreplaceable part of my world.
     </p>
 
@@ -131,24 +141,24 @@
     </p>
 
     <div class="button-row">
-      <button onclick="acceptBestFriendRequest()">Yes, Bestie 💙</button>
+      <button onclick="acceptBestFriendRequest()">Yes, Bestie 💗</button>
       <div class="no-placeholder"></div>
     </div>
   </div>
 
   <!-- FINAL SCREEN -->
   <div class="container hidden" id="finalScreen">
-    <h1>💙 My Favourite Homosapien ⭐️</h1>
+    <h1>💗 My Favourite Homosapien 🎀</h1>
     <p>
       Yayyy!! 🎉  
-      I’m lucky to have you in my life 🥰🌺 
+      I’m lucky to have you in my life 🥰  
       <br><br>
-      Thanks for all the laughs and memories😄
-      I am really missing you a lot 😔
+      Thanks for all the laughs and memories 😄
+      I am really missing you a lot 😣
     </p>
   </div>
 
-  <!-- REAL NO BUTTON -->
+  <!-- NOPE BUTTON -->
   <button id="nopeButton">Nope 😝</button>
 
   <div class="hearts" id="hearts"></div>
@@ -202,7 +212,7 @@
     const heartsContainer = document.getElementById("hearts");
     setInterval(() => {
       const heart = document.createElement("span");
-      heart.innerHTML = "💙";
+      heart.innerHTML = "💗";
       heart.style.left = Math.random() * 100 + "vw";
       heart.style.animationDuration = (Math.random() * 3 + 5) + "s";
       heartsContainer.appendChild(heart);
