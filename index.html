@@ -2,8 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>For my fav human 💗</title>
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -15,18 +13,21 @@
       font-family: 'Poppins', sans-serif;
     }
 
+    /* 🌸 BACKGROUND – deeper Valentine pink */
     body {
-      min-height: 100vh;
+      height: 100vh;
       background: linear-gradient(135deg, #ff7a8a, #ffb3c6);
       display: flex;
       justify-content: center;
       align-items: center;
       overflow: hidden;
+      color: #ffffff;
       text-align: center;
     }
 
+    /* 💗 CARD – soft blush with contrast */
     .container {
-      background: rgba(255, 240, 245, 0.9);
+      background: rgba(255, 240, 245, 0.85);
       padding: 40px;
       border-radius: 26px;
       backdrop-filter: blur(14px);
@@ -47,90 +48,75 @@
     p {
       font-size: 1.1rem;
       line-height: 1.6;
-      margin-bottom: 28px;
+      margin-bottom: 30px;
       color: #7a2c3f;
     }
 
+    /* 🌹 BUTTONS */
     button {
-      padding: 16px 28px;
+      padding: 12px 28px;
       border: none;
       border-radius: 30px;
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
       background: #ffffff;
       color: #ff4d6d;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      white-space: nowrap;
       box-shadow: 0 8px 18px rgba(255, 77, 109, 0.25);
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 25px rgba(255, 77, 109, 0.35);
     }
 
     .button-row {
       display: flex;
       justify-content: center;
+      align-items: center;
       gap: 16px;
-      position: relative;
     }
 
-    /* ❌ NOPE (DESKTOP) */
+    .no-placeholder {
+      width: 110px;
+      height: 44px;
+    }
+
+    /* ❌ NOPE BUTTON */
     #nopeButton {
       position: fixed;
       background: #ff4d6d;
       color: white;
       z-index: 10;
       display: none;
+      box-shadow: 0 10px 25px rgba(255, 77, 109, 0.45);
     }
 
     .hidden {
       display: none;
     }
 
-    /* 💕 HEARTS */
+    /* 💕 FLOATING HEARTS */
     .hearts span {
       position: absolute;
       bottom: -20px;
-      font-size: 18px;
+      font-size: 20px;
       animation: floatUp 8s linear infinite;
-      opacity: 0.7;
+      opacity: 0.8;
+      z-index: 1;
     }
 
     @keyframes floatUp {
       0% { transform: translateY(0); opacity: 1; }
       100% { transform: translateY(-100vh); opacity: 0; }
     }
-
-    /* 📱 MOBILE FIX */
-    @media (max-width: 480px) {
-      .container {
-        padding: 28px 22px;
-      }
-
-      h1 {
-        font-size: 2rem;
-      }
-
-      p {
-        font-size: 1rem;
-      }
-
-      .button-row {
-        flex-direction: column;
-      }
-
-      button {
-        width: 100%;
-      }
-
-      /* ❗ MOBILE: Nope lives INSIDE layout */
-      #nopeButton {
-        position: static;
-        display: block;
-        margin-top: 12px;
-      }
-    }
   </style>
 </head>
 <body>
 
-  <!-- ROSE -->
+  <!-- ROSE SCREEN -->
   <div class="container" id="roseScreen">
     <h1>🌹 Hey Priyaaaa!</h1>
     <p>
@@ -141,11 +127,11 @@
 
     <div class="button-row">
       <button onclick="acceptRose()">Accept Rose 😄</button>
-      <button id="nopeButton" onclick="makeNopeRunAway()">Nope 😝</button>
+      <div class="no-placeholder"></div>
     </div>
   </div>
 
-  <!-- QUESTION -->
+  <!-- FRIENDSHIP QUESTION SCREEN -->
   <div class="container hidden" id="friendshipQuestionScreen">
     <h1>🤝 Quick question for you</h1>
     <p>
@@ -156,59 +142,82 @@
 
     <div class="button-row">
       <button onclick="acceptBestFriendRequest()">Yes, Bestie 💗</button>
-      <button id="nopeButton2" onclick="makeNopeRunAway()">Nope 😝</button>
+      <div class="no-placeholder"></div>
     </div>
   </div>
 
-  <!-- FINAL -->
+  <!-- FINAL SCREEN -->
   <div class="container hidden" id="finalScreen">
     <h1>💗 My Favourite Homosapien 🎀</h1>
     <p>
       Yayyy!! 🎉  
       I’m lucky to have you in my life 🥰  
       <br><br>
-      Thanks for all the laughs and memories 😄  
+      Thanks for all the laughs and memories 😄
       I am really missing you a lot 😣
     </p>
   </div>
 
+  <!-- NOPE BUTTON -->
+  <button id="nopeButton">Nope 😝</button>
+
   <div class="hearts" id="hearts"></div>
 
   <script>
+    const nopeButton = document.getElementById("nopeButton");
+
+    function getVisibleNopePlaceholder() {
+      const visibleContainer = document.querySelector(".container:not(.hidden)");
+      return visibleContainer.querySelector(".no-placeholder");
+    }
+
+    function positionNopeBesideAffirmative() {
+      const placeholder = getVisibleNopePlaceholder();
+      if (!placeholder) return;
+
+      const rect = placeholder.getBoundingClientRect();
+      nopeButton.style.left = rect.left + "px";
+      nopeButton.style.top = rect.top + "px";
+      nopeButton.style.display = "block";
+    }
+
     function makeNopeRunAway() {
-      if (window.innerWidth <= 480) {
-        alert("Nice try 😝");
-        return;
-      }
+      const width = nopeButton.offsetWidth || 110;
+      const height = nopeButton.offsetHeight || 44;
 
-      const nope = document.getElementById("nopeButton");
-      const w = nope.offsetWidth;
-      const h = nope.offsetHeight;
+      const x = Math.random() * (window.innerWidth - width);
+      const y = Math.random() * (window.innerHeight - height);
 
-      nope.style.display = "block";
-      nope.style.left = Math.random() * (window.innerWidth - w) + "px";
-      nope.style.top = Math.random() * (window.innerHeight - h) + "px";
+      nopeButton.style.left = x + "px";
+      nopeButton.style.top = y + "px";
     }
 
     function acceptRose() {
       document.getElementById("roseScreen").classList.add("hidden");
       document.getElementById("friendshipQuestionScreen").classList.remove("hidden");
+      positionNopeBesideAffirmative();
     }
 
     function acceptBestFriendRequest() {
       document.getElementById("friendshipQuestionScreen").classList.add("hidden");
       document.getElementById("finalScreen").classList.remove("hidden");
+      nopeButton.style.display = "none";
     }
 
-    // floating hearts
-    const hearts = document.getElementById("hearts");
+    window.addEventListener("load", positionNopeBesideAffirmative);
+    nopeButton.addEventListener("mouseenter", makeNopeRunAway);
+    nopeButton.addEventListener("click", makeNopeRunAway);
+
+    // Floating hearts
+    const heartsContainer = document.getElementById("hearts");
     setInterval(() => {
-      const h = document.createElement("span");
-      h.innerHTML = "💗";
-      h.style.left = Math.random() * 100 + "vw";
-      hearts.appendChild(h);
-      setTimeout(() => h.remove(), 8000);
-    }, 400);
+      const heart = document.createElement("span");
+      heart.innerHTML = "💗";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 3 + 5) + "s";
+      heartsContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 8000);
+    }, 300);
   </script>
 
 </body>
